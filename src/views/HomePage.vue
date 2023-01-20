@@ -1,10 +1,10 @@
 <template>
-    <div class="full-width">
+    <div class="full-width row items-center justify-center">
         <div class="full-width processedImgConatainer" id="container">
             <img
             id="image-bg"
             class="full-width image-bg"
-            src="http://dapi.parstechai.ir/media/rug-decoration/aedf0196-1131-4e4b-aba2-a32d08508eb8.jpg"
+            src="./../assets/images/room1.jpg"
             />
 
             <div id="canvas-container" class="canvas-container rounded-5px"></div>
@@ -12,7 +12,7 @@
             <img
             id="image-not-floor"
             class="full-width image-not-floor"
-            src="http://dapi.parstechai.ir/media/rug-decoration/5ceee4f7-c0fa-48a8-9bcc-3058eed3ed43.png"/>
+            src="./../assets/images/room1-no-floor.png"/>
         </div>
     </div>
 </template>
@@ -159,11 +159,6 @@ function set_rug_geometry(rug, image_width, image_height) {
 }
 function set_rug_material(rug, image_path) {
     image_bg_element_no_floor.value.addEventListener("load",function(){
-
-        // const isLoadingFinish = image_bg_element_no_floor.value.complete && image_bg_element_no_floor.value.naturalHeight !== 0;
-        // if(isLoadingFinish)
-        // Loading.hide();
-
         let texture = new THREE.TextureLoader().load(image_path);
         texture.anisotropy = 64;
         texture.needsUpdate = true;
@@ -186,16 +181,24 @@ onMounted(() =>{
     width = positionInfo.width;
     left = positionInfo.left;
     top = positionInfo.top;
+    const rugPic = new URL(`./../assets/images/rug1.jpg`, import.meta.url).href
+    //angle: 2.7691142559051514
+    //fov: 32.836980729713474
     perspective(
-        15.45,
-        15.45,
-        "https://dapi.parstechai.ir/media/rug-decoration/568f1c48-dc38-434e-bd1c-8ab96163ef19.jpg",
+        2.7691142559051514,
+        32.836980729713474,
+        //"https://dapi.parstechai.ir/media/rug-decoration/568f1c48-dc38-434e-bd1c-8ab96163ef19.jpg",
+        rugPic,
         3,
         4
     )
 });
 </script>
 <style lang="scss" scoped>
+:deep(canvas){
+    width:100% !important;
+    height:100% !important;
+}
 .processedImgConatainer {
     position: relative;
     top: 0;
